@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Harbour Light — coastal daylight, sea-glass teal,
+  pale blue-grey air. Name tags, not cameras.
+*/
+:root {
+  --bg: oklch(0.995 0.004 210);
+  --surface: oklch(0.97 0.014 205);
+  --surface-hover: oklch(0.945 0.02 205);
+  --ink: oklch(0.27 0.03 230);
+  --muted: oklch(0.5 0.03 215);
+  --line: oklch(0.9 0.02 210);
+  --primary: oklch(0.52 0.09 200);
+  --primary-hover: oklch(0.46 0.1 200);
+  --primary-fg: oklch(0.99 0.005 210);
+  --accent: oklch(0.62 0.1 195);
+  --accent-fg: oklch(0.99 0.005 210);
+  --danger: oklch(0.52 0.15 25);
+  --note: oklch(0.96 0.025 205);
+  --note-line: oklch(0.86 0.04 205);
+  --background: var(--bg);
+  --foreground: var(--ink);
+  --ring: oklch(0.52 0.09 200);
+  --selection: oklch(0.9 0.05 200);
+}
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+
+  ::selection {
+    background: var(--selection);
+    color: var(--ink);
+  }
+
+  .font-display {
+    font-family: var(--font-display), var(--font-sans), ui-sans-serif, sans-serif;
+  }
+
+  body {
+    @apply bg-bg text-ink antialiased;
+    font-family: var(--font-sans), ui-sans-serif, sans-serif;
+    background-image:
+      radial-gradient(
+        1100px 480px at 8% -8%,
+        oklch(0.93 0.04 200 / 0.55),
+        transparent 62%
+      ),
+      radial-gradient(
+        900px 400px at 100% 0%,
+        oklch(0.95 0.03 220 / 0.4),
+        transparent 55%
+      );
+    background-attachment: fixed;
+    min-height: 100dvh;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fade-up 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-brand-in {
+    animation: brand-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes brand-in {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-in,
+  .animate-brand-in {
+    animation: fade-in 1ms linear both;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
