@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack --hostname 127.0.0.1 --port 43127",
-    "build": "next build && node scripts/prepare-hostinger.mjs",
-    "build:hostinger": "npm run build",
+"build": "next build --webpack"    "build:hostinger": "npm run build",
     "deploy:hostinger": "npm run build && node scripts/upload-hostinger.mjs",
     "start": "npx --yes serve@14 out -l 43127",
     "lint": "tsc --noEmit"
